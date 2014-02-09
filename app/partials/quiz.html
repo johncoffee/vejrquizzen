@@ -1,0 +1,77 @@
+
+<div class="row" ng-controller="SubmissionController">
+
+    <div class="col-xs-12">
+        <h1>Vejrquizzen</h1>
+        <p>Gæt hvordan vejrforholdene er kl 12 i morgen
+        <div ng-show="choosePostalCode" ng-include="'app/partials/cities.html'"></div>    
+    </div>
+
+    <div class="col-xs-12">
+        <h3>
+            Vejret lige nu
+            <span class="btn btn-default" ng-click="choosePostalCode=!choosePostalCode">Vælg by</span>
+        </h3>
+        <p><img src="http://servlet.dmi.dk/byvejr/servlet/byvejr_dag1?by={{postnr}}&mode=long">
+        <p><img src="byvejr_dag1.png">
+    </div>
+
+    <div class="col-xs-12">
+        <h3>Hvordan ser vejret ud kl 12 i morgen?</h3>
+           
+        <div ng-show="!hasGivenAnswer">
+            <p>Afgiv dit bud
+            <p ng-show="votingTime">Kl er 12! Tid til at stemme på en vejrmelding!
+            <div ng-repeat="answer in options"  ng-click="$parent.selectedAnswer = answer.id" 
+                 ng-class="{'btn-success': $parent.selectedAnswer === answer.id}" class="pull-left btn btn-default answer_image">
+                <img src="images/{{answer.file}}.png">
+            </div>
+
+            <div class="btn btn-primary" ng-click="submit(selectedAnswer)">Send!</div>
+
+            <div class="clearfix"></div>
+        </div>
+        
+        <div ng-show="hasGivenAnswer">            
+            <!--<p>Dit gæt er i {{hour}}. time {{points}} point værd.-->
+            <p>Dit gæt: <img src="images/{{guessImage}}.png">            
+            <div class="btn btn-primary" ng-click="tryDeleteAnswer()">Slet</div>                  
+        </div>
+        
+    </div>
+        
+    
+<!--    
+    <div class="col-xs-12">
+        <form class="form-horizontal" role="form">
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+                <div class="col-sm-10">
+                    <input class="form-control" id="inputEmail3" placeholder="Email">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+                <div class="col-sm-10">
+                    <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox"> Remember me
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-default">Sign in</button>
+                </div>
+            </div>
+        </form>
+    </div>-->
+
+
+</div>
